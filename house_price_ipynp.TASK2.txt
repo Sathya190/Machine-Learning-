@@ -1,0 +1,50 @@
+      HOUSE PRICE.PREDICTION:
+"""house price. ipynp
+       
+"""
+
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+from sklearn.preprocessing import LabelEncoder
+
+house=pd.read_csv("/content/house_prices.csv")
+
+house.head()
+	area	rooms	age	location	price
+0	142	2	34	Suburb	141194
+1	219	4	5	Downtown	352098
+2	132	2	36	Downtown	197179
+3	54	5	4	Suburb	111431
+4	146	2	32	Suburb	182135
+
+house.isnull().sum()
+
+0
+area	0
+rooms	0
+age	0
+location	0
+price	0
+
+dtype: int64
+
+le=LabelEncoder()
+
+house['location']=le.fit_transform(house['location'])
+
+int_data=house[['area','rooms','age','location']]
+
+dep_data=house['price']
+
+LR=LinearRegression()
+
+LR.fit(int_data,dep_data)
+
+LinearRegression
+?i
+LinearRegression()
+
+print("The house price is",LR.predict([[54,5,4,3]]))
+The house price is [146768.5828885]
+/usr/local/lib/python3.11/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LinearRegression was fitted with feature names
+  warnings.warn(
